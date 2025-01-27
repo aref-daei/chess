@@ -1,1 +1,1 @@
-# The chess game
+# The chess game document
