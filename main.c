@@ -37,48 +37,42 @@ int main()
         displayBoard(board);
 
         char command[10];
-        printf("Command:   [command]\nExit:      exit    e\n> ");
+        printf("Command:   [command]\nExit:      exit\n> ");
         scanf("%s", command);
 
         char log[100];
 
-        switch (command[0])
+        if (command[0] == 'P')
         {
-        case 'P':
             isValidPawnMove();
-            break;
-
-        case 'R':
+        }
+        else if (command[0] == 'R')
+        {
             isValidRookMove();
-            break;
-
-        case 'N':
+        }
+        else if (command[0] == 'N')
+        {
             isValidKnightMove();
-            break;
-
-        case 'B':
+        }
+        else if (command[0] == 'B')
+        {
             isValidBishopMove();
-            break;
-
-        case 'Q':
+        }
+        else if (command[0] == 'Q')
+        {
             isValidQueenMove();
-            break;
-
-        case 'K':
+        }
+        else if (command[0] == 'K')
+        {
             isValidKingMove();
+        }
+        else if (!strcmp(command, "exit"))
             break;
-
-        case 'e':
-            printf("Exiting the game...\n");
-            break;
-
-        default:
+        else
+        {
             printf("The command is invalid!\n");
             continue;
         }
-
-        if (command[0] == 'e')
-            break;
 
         if (isCheckMate())
         {
