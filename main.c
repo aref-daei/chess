@@ -47,27 +47,45 @@ int main()
 
         if (command[0] == 'P')
         {
-            isValidPawnMove(board, command, turn, log);
+            if (isValidPawnMove(board, command, turn, log))
+                move(board, command, turn, log);
+            else
+                continue;
         }
         else if (command[0] == 'R')
         {
-            isValidRookMove(board, command, turn, log);
+            if (isValidRookMove(board, command, turn, log))
+                move(board, command, turn, log);
+            else
+                continue;
         }
         else if (command[0] == 'N')
         {
-            isValidKnightMove(board, command, turn, log);
+            if (isValidKnightMove(board, command, turn, log))
+                move(board, command, turn, log);
+            else
+                continue;
         }
         else if (command[0] == 'B')
         {
-            isValidBishopMove(board, command, turn, log);
+            if (isValidBishopMove(board, command, turn, log))
+                move(board, command, turn, log);
+            else
+                continue;
         }
         else if (command[0] == 'Q')
         {
-            isValidQueenMove(board, command, turn, log);
+            if (isValidQueenMove(board, command, turn, log))
+                move(board, command, turn, log);
+            else
+                continue;
         }
         else if (command[0] == 'K')
         {
-            isValidKingMove(board, command, turn, log);
+            if (isValidKingMove(board, command, turn, log))
+                move(board, command, turn, log);
+            else
+                continue;
         }
         else if (!strcmp(command, "exit"))
             break;
@@ -150,10 +168,12 @@ void move(char board[][CBD], char command[], int turn, char log[])
     switch (turn)
     {
     case 1:
-        /* code */
+        board[CBD - (command[4] - 49 + 1 + 1)][command[3] - 97 + 1] = board[CBD - (command[2] - 49 + 1 + 1)][command[1] - 97 + 1];
+        board[CBD - (command[2] - 49 + 1 + 1)][command[1] - 97 + 1] = ' ';
         break;
     case 2:
-        /* code */
+        board[command[4] - 49 + 1][CBD - (command[3] - 97 + 1)] = board[command[2] - 49 + 1][CBD - (command[1] - 97 + 1)];
+        board[command[2] - 49 + 1][CBD - (command[1] - 97 + 1)] = ' ';
         break;
     }
 }
@@ -163,12 +183,11 @@ int isValidPawnMove(char board[][CBD], char command[], int turn, char log[])
     switch (turn)
     {
     case 1:
-        if (board[CBD - (command[2] - 49 + 2)][command[1] - 97 + 1] != 'P')
+        if (board[CBD - (command[2] - 49 + 1 + 1)][command[1] - 97 + 1] != 'P')
         {
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
-        printf("POOOOOOO\n");
         break;
 
     case 2:
@@ -177,7 +196,6 @@ int isValidPawnMove(char board[][CBD], char command[], int turn, char log[])
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
-        printf("pOOOOOOO\n");
         break;
     }
 
@@ -189,12 +207,11 @@ int isValidRookMove(char board[][CBD], char command[], int turn, char log[])
     switch (turn)
     {
     case 1:
-        if (board[CBD - (command[2] - 49 + 2)][command[1] - 97 + 1] != 'R')
+        if (board[CBD - (command[2] - 49 + 1 + 1)][command[1] - 97 + 1] != 'R')
         {
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
-        printf("ROOOOOOO\n");
         break;
 
     case 2:
@@ -203,7 +220,6 @@ int isValidRookMove(char board[][CBD], char command[], int turn, char log[])
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
-        printf("rOOOOOOO\n");
         break;
     }
 
@@ -215,12 +231,11 @@ int isValidKnightMove(char board[][CBD], char command[], int turn, char log[])
     switch (turn)
     {
     case 1:
-        if (board[CBD - (command[2] - 49 + 2)][command[1] - 97 + 1] != 'N')
+        if (board[CBD - (command[2] - 49 + 1 + 1)][command[1] - 97 + 1] != 'N')
         {
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
-        printf("NOOOOOOO\n");
         break;
 
     case 2:
@@ -229,7 +244,6 @@ int isValidKnightMove(char board[][CBD], char command[], int turn, char log[])
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
-        printf("nOOOOOOO\n");
         break;
     }
 
@@ -241,12 +255,11 @@ int isValidBishopMove(char board[][CBD], char command[], int turn, char log[])
     switch (turn)
     {
     case 1:
-        if (board[CBD - (command[2] - 49 + 2)][command[1] - 97 + 1] != 'B')
+        if (board[CBD - (command[2] - 49 + 1 + 1)][command[1] - 97 + 1] != 'B')
         {
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
-        printf("BOOOOOOO\n");
         break;
 
     case 2:
@@ -255,7 +268,6 @@ int isValidBishopMove(char board[][CBD], char command[], int turn, char log[])
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
-        printf("bOOOOOOO\n");
         break;
     }
 
@@ -267,12 +279,11 @@ int isValidQueenMove(char board[][CBD], char command[], int turn, char log[])
     switch (turn)
     {
     case 1:
-        if (board[CBD - (command[2] - 49 + 2)][command[1] - 97 + 1] != 'Q')
+        if (board[CBD - (command[2] - 49 + 1 + 1)][command[1] - 97 + 1] != 'Q')
         {
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
-        printf("QOOOOOOO\n");
         break;
 
     case 2:
@@ -281,7 +292,6 @@ int isValidQueenMove(char board[][CBD], char command[], int turn, char log[])
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
-        printf("qOOOOOOO\n");
         break;
     }
 
@@ -293,12 +303,11 @@ int isValidKingMove(char board[][CBD], char command[], int turn, char log[])
     switch (turn)
     {
     case 1:
-        if (board[CBD - (command[2] - 49 + 2)][command[1] - 97 + 1] != 'K')
+        if (board[CBD - (command[2] - 49 + 1 + 1)][command[1] - 97 + 1] != 'K')
         {
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
-        printf("KOOOOOOO\n");
         break;
 
     case 2:
@@ -307,7 +316,6 @@ int isValidKingMove(char board[][CBD], char command[], int turn, char log[])
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
-        printf("kOOOOOOO\n");
         break;
     }
 
