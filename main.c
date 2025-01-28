@@ -176,6 +176,7 @@ void move(char board[][CBD], char command[], int turn, char log[])
         board[command[2] - 49 + 1][CBD - (command[1] - 97 + 1 + 1)] = ' ';
         break;
     }
+    /* zone */
 }
 
 int isValidPawnMove(char board[][CBD], char command[], int turn, char log[])
@@ -212,12 +213,22 @@ int isValidRookMove(char board[][CBD], char command[], int turn, char log[])
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
+        if ((command[2] != command[4]) && (command[1] != command[3]))
+        {
+            strcpy(log, "Movement is not allowed.");
+            return 0;
+        }
         break;
 
     case 2:
         if (board[command[2] - 49 + 1][CBD - (command[1] - 97 + 1 + 1)] != 'r')
         {
             strcpy(log, "The piece you chose is wrong.");
+            return 0;
+        }
+        if ((command[2] != command[4]) && (command[1] != command[3]))
+        {
+            strcpy(log, "Movement is not allowed.");
             return 0;
         }
         break;
