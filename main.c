@@ -8,7 +8,7 @@ void clearScreen();
 
 void displayBoard(char board[][CBD], char log[]);
 void switchTurn(char board[][CBD], int *turn);
-void move(char board[][CBD], char command[], char log[]);
+void move(char board[][CBD], char command[], int turn, char log[]);
 
 int isValidPawnMove(char board[][CBD], char command[], int turn, char log[]);
 int isValidRookMove(char board[][CBD], char command[], int turn, char log[]);
@@ -145,7 +145,18 @@ void switchTurn(char board[][CBD], int *turn)
     *turn == 1 ? (*turn = 2) : (*turn = 1);
 }
 
-void move(char board[][CBD], char command[], char log[]) {}
+void move(char board[][CBD], char command[], int turn, char log[])
+{
+    switch (turn)
+    {
+    case 1:
+        /* code */
+        break;
+    case 2:
+        /* code */
+        break;
+    }
+}
 
 int isValidPawnMove(char board[][CBD], char command[], int turn, char log[])
 {
@@ -167,9 +178,6 @@ int isValidPawnMove(char board[][CBD], char command[], int turn, char log[])
             return 0;
         }
         printf("pOOOOOOO\n");
-        break;
-
-    default:
         break;
     }
 
@@ -197,9 +205,6 @@ int isValidRookMove(char board[][CBD], char command[], int turn, char log[])
         }
         printf("rOOOOOOO\n");
         break;
-
-    default:
-        break;
     }
 
     return 1;
@@ -225,9 +230,6 @@ int isValidKnightMove(char board[][CBD], char command[], int turn, char log[])
             return 0;
         }
         printf("nOOOOOOO\n");
-        break;
-
-    default:
         break;
     }
 
@@ -255,9 +257,6 @@ int isValidBishopMove(char board[][CBD], char command[], int turn, char log[])
         }
         printf("bOOOOOOO\n");
         break;
-
-    default:
-        break;
     }
 
     return 1;
@@ -284,9 +283,6 @@ int isValidQueenMove(char board[][CBD], char command[], int turn, char log[])
         }
         printf("qOOOOOOO\n");
         break;
-
-    default:
-        break;
     }
 
     return 1;
@@ -312,9 +308,6 @@ int isValidKingMove(char board[][CBD], char command[], int turn, char log[])
             return 0;
         }
         printf("kOOOOOOO\n");
-        break;
-
-    default:
         break;
     }
 
