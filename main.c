@@ -1,7 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #define CBD 10 // Chess Board Dimensions
+
+void clearScreen();
 
 void displayBoard(char board[][CBD], char log[]);
 void switchTurn(char board[][CBD], int *turn);
@@ -86,12 +89,23 @@ int main()
     return 0;
 }
 
+void clearScreen()
+{
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+}
+
 void displayBoard(char board[][CBD], char log[])
 {
     const char *colorWhite = "\x1b[1;34;47m"; // White
     const char *colorBlack = "\x1b[1;34;40m"; // Black
     const char *colorGray = "\x1b[3;90m";     // Gray
     const char *colorReset = "\x1b[0m";       // Reset color
+
+    clearScreen();
 
     for (int i = 0; i < CBD; i++)
     {
