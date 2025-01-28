@@ -172,8 +172,8 @@ void move(char board[][CBD], char command[], int turn, char log[])
         board[CBD - (command[2] - 49 + 1 + 1)][command[1] - 97 + 1] = ' ';
         break;
     case 2:
-        board[command[4] - 49 + 1][CBD - (command[3] - 97 + 1)] = board[command[2] - 49 + 1][CBD - (command[1] - 97 + 1)];
-        board[command[2] - 49 + 1][CBD - (command[1] - 97 + 1)] = ' ';
+        board[command[4] - 49 + 1][CBD - (command[3] - 97 + 1 + 1)] = board[command[2] - 49 + 1][CBD - (command[1] - 97 + 1 + 1)];
+        board[command[2] - 49 + 1][CBD - (command[1] - 97 + 1 + 1)] = ' ';
         break;
     }
 }
@@ -191,7 +191,7 @@ int isValidPawnMove(char board[][CBD], char command[], int turn, char log[])
         break;
 
     case 2:
-        if (board[command[2] - 49 + 1][CBD - (command[1] - 97 + 1)] != 'p')
+        if (board[command[2] - 49 + 1][CBD - (command[1] - 97 + 1 + 1)] != 'p')
         {
             strcpy(log, "The piece you chose is wrong.");
             return 0;
@@ -215,7 +215,7 @@ int isValidRookMove(char board[][CBD], char command[], int turn, char log[])
         break;
 
     case 2:
-        if (board[command[2] - 49 + 1][CBD - (command[1] - 97 + 1)] != 'r')
+        if (board[command[2] - 49 + 1][CBD - (command[1] - 97 + 1 + 1)] != 'r')
         {
             strcpy(log, "The piece you chose is wrong.");
             return 0;
@@ -239,7 +239,7 @@ int isValidKnightMove(char board[][CBD], char command[], int turn, char log[])
         break;
 
     case 2:
-        if (board[command[2] - 49 + 1][CBD - (command[1] - 97 + 1)] != 'n')
+        if (board[command[2] - 49 + 1][CBD - (command[1] - 97 + 1 + 1)] != 'n')
         {
             strcpy(log, "The piece you chose is wrong.");
             return 0;
@@ -250,7 +250,7 @@ int isValidKnightMove(char board[][CBD], char command[], int turn, char log[])
     return 1;
 }
 
-int isValidBishopMove(char board[][CBD], char command[], int turn, char log[])
+int isValidBishopMove(char board[][CBD], char command[], int turn, char log[]) /* This has a problem. */
 {
     switch (turn)
     {
@@ -260,12 +260,27 @@ int isValidBishopMove(char board[][CBD], char command[], int turn, char log[])
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
+        if (CBD - (command[2] - 49 + 1) + command[1] - 97 != CBD - (command[4] - 49 + 1) + command[3] - 97)
+        {
+            strcpy(log, "Movement is not allowed.");
+            return 0;
+        }
+        if ((command[1] - 97 + 1 < 5 && command[1] > command[3]) || (command[1] - 97 + 1 > 4 && command[1] < command[3]))
+        {
+            strcpy(log, "You can't go that way.");
+            return 0;
+        }
         break;
 
     case 2:
-        if (board[command[2] - 49 + 1][CBD - (command[1] - 97 + 1)] != 'b')
+        if (board[command[2] - 49 + 1][CBD - (command[1] - 97 + 1 + 1)] != 'b')
         {
             strcpy(log, "The piece you chose is wrong.");
+            return 0;
+        }
+        if (command[2] - 49 + 1 + CBD - (command[1] - 97 + 1) != command[4] - 49 + 1 + CBD - (command[3] - 97 + 1))
+        {
+            strcpy(log, "Movement is not allowed.");
             return 0;
         }
         break;
@@ -287,7 +302,7 @@ int isValidQueenMove(char board[][CBD], char command[], int turn, char log[])
         break;
 
     case 2:
-        if (board[command[2] - 49 + 1][CBD - (command[1] - 97 + 1)] != 'q')
+        if (board[command[2] - 49 + 1][CBD - (command[1] - 97 + 1 + 1)] != 'q')
         {
             strcpy(log, "The piece you chose is wrong.");
             return 0;
@@ -311,7 +326,7 @@ int isValidKingMove(char board[][CBD], char command[], int turn, char log[])
         break;
 
     case 2:
-        if (board[command[2] - 49 + 1][CBD - (command[1] - 97 + 1)] != 'k')
+        if (board[command[2] - 49 + 1][CBD - (command[1] - 97 + 1 + 1)] != 'k')
         {
             strcpy(log, "The piece you chose is wrong.");
             return 0;
