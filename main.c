@@ -423,12 +423,22 @@ int isValidKingMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
+        if ((abs(cmd[1]-cmd[3]) != 1) && (abs(cmd[2]-cmd[4]) != 2))
+        {
+            strcpy(log, "Movement is not allowed.");
+            return 0;
+        }
         break;
 
     case 2:
         if (board[cmd[2] - 49 + 1][CBD - (cmd[1] - 97 + 1 + 1)] != 'k')
         {
             strcpy(log, "The piece you chose is wrong.");
+            return 0;
+        }
+        if ((abs(cmd[1]-cmd[3]) != 1) && (abs(cmd[2]-cmd[4]) != 2))
+        {
+            strcpy(log, "Movement is not allowed.");
             return 0;
         }
         break;
