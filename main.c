@@ -196,6 +196,22 @@ int isValidPawnMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
+        if (cmd[2] == '2')
+        {
+            if ((cmd[1] != cmd[3]) || (cmd[4] - cmd[2] > 2))
+            {
+                strcpy(log, "Movement is not allowed.");
+                return 0;
+            }
+        }
+        else
+        {
+            if ((cmd[1] != cmd[3]) || (cmd[4] - cmd[2] > 1))
+            {
+                strcpy(log, "Movement is not allowed.");
+                return 0;
+            }
+        }
         break;
 
     case 2:
@@ -203,6 +219,22 @@ int isValidPawnMove(char board[][CBD], char cmd[], int turn, char log[])
         {
             strcpy(log, "The piece you chose is wrong.");
             return 0;
+        }
+        if (cmd[2] == '7')
+        {
+            if ((cmd[1] != cmd[3]) || (cmd[2] - cmd[4] > 2))
+            {
+                strcpy(log, "Movement is not allowed.");
+                return 0;
+            }
+        }
+        else
+        {
+            if ((cmd[1] != cmd[3]) || (cmd[2] - cmd[4] > 1))
+            {
+                strcpy(log, "Movement is not allowed.");
+                return 0;
+            }
         }
         break;
     }
