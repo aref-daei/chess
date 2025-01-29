@@ -6,8 +6,8 @@
 
 void clearScreen();
 
-void displayBoard(char board[][CBD], char log[]);
-void switchTurn(char board[][CBD], int *turn);
+void displayBoard(char board[][CBD], int turn, int round, char log[]);
+void switchTurn(char board[][CBD], int *turn, int *round);
 void move(char board[][CBD], char cmd[], int turn, char log[]);
 
 int isValidPawnMove(char board[][CBD], char cmd[], int turn, char log[]);
@@ -35,11 +35,13 @@ int main()
 
     int turn = 1;
 
+    int round = 1;
+
     char log[64] = {'\0'};
 
     while (1)
     {
-        displayBoard(board, log);
+        displayBoard(board, turn, round, log);
 
         char cmd[8];
         printf("Command:   [PIECE][poo][pod]\nExit:      exit\n> ");
@@ -101,7 +103,7 @@ int main()
         //     break;
         // }
 
-        switchTurn(board, &turn);
+        switchTurn(board, &turn, &round);
     }
 
     return 0;
@@ -116,7 +118,7 @@ void clearScreen()
 #endif
 }
 
-void displayBoard(char board[][CBD], char log[])
+void displayBoard(char board[][CBD], int turn, int round, char log[])
 {
     const char *colorWhite = "\x1b[1;34;47m"; // White
     const char *colorBlack = "\x1b[1;34;40m"; // Black
@@ -137,6 +139,9 @@ void displayBoard(char board[][CBD], char log[])
                 printf("%s%c %s", colorBlack, board[i][j], colorReset);
         }
 
+        // if (i == 0)
+        //     printf("    Player's turn: %d  Round: %d", turn, round);
+
         if (i == 0 && log[0] != '\0')
             printf("    \x1b[93mLog: %s%s", log, colorReset);
 
@@ -147,7 +152,7 @@ void displayBoard(char board[][CBD], char log[])
     }
 }
 
-void switchTurn(char board[][CBD], int *turn)
+void switchTurn(char board[][CBD], int *turn, int *round)
 {
     char temp[CBD][CBD];
 
@@ -164,6 +169,7 @@ void switchTurn(char board[][CBD], int *turn)
     }
 
     *turn == 1 ? (*turn = 2) : (*turn = 1);
+    ++*round;
 }
 
 void move(char board[][CBD], char cmd[], int turn, char log[])
@@ -173,10 +179,14 @@ void move(char board[][CBD], char cmd[], int turn, char log[])
     case 1:
         board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] = board[CBD - (cmd[2] - 49 + 1 + 1)][cmd[1] - 97 + 1];
         board[CBD - (cmd[2] - 49 + 1 + 1)][cmd[1] - 97 + 1] = ' ';
+        if (board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] == 'P' && cmd[4] == '8')
+            board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] == 'Q';
         break;
     case 2:
         board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] = board[cmd[2] - 49 + 1][CBD - (cmd[1] - 97 + 1 + 1)];
         board[cmd[2] - 49 + 1][CBD - (cmd[1] - 97 + 1 + 1)] = ' ';
+        if (board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] == 'p' && cmd[4] == '1')
+            board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] == 'q';
         break;
     }
 }
@@ -198,7 +208,7 @@ int isValidPawnMove(char board[][CBD], char cmd[], int turn, char log[])
         }
         if (cmd[2] == '2')
         {
-            if ((cmd[1] != cmd[3]) || (cmd[4] - cmd[2] > 2))
+            if ((cmd[1] != cmd[3]) || (abs(cmd[2] - cmd[4]) > 2))
             {
                 strcpy(log, "Movement is not allowed.");
                 return 0;
@@ -206,11 +216,16 @@ int isValidPawnMove(char board[][CBD], char cmd[], int turn, char log[])
         }
         else
         {
-            if ((cmd[1] != cmd[3]) || (cmd[4] - cmd[2] > 1))
+            if ((cmd[1] != cmd[3]) || (abs(cmd[2] - cmd[4]) > 1))
             {
                 strcpy(log, "Movement is not allowed.");
                 return 0;
             }
+        }
+        if (board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] == 'P')
+        {
+            strcpy(log, "You cannot capture your own piece.");
+            return 0;
         }
         break;
 
@@ -222,7 +237,7 @@ int isValidPawnMove(char board[][CBD], char cmd[], int turn, char log[])
         }
         if (cmd[2] == '7')
         {
-            if ((cmd[1] != cmd[3]) || (cmd[2] - cmd[4] > 2))
+            if ((cmd[1] != cmd[3]) || (abs(cmd[2] - cmd[4]) > 2))
             {
                 strcpy(log, "Movement is not allowed.");
                 return 0;
@@ -230,11 +245,16 @@ int isValidPawnMove(char board[][CBD], char cmd[], int turn, char log[])
         }
         else
         {
-            if ((cmd[1] != cmd[3]) || (cmd[2] - cmd[4] > 1))
+            if ((cmd[1] != cmd[3]) || (abs(cmd[2] - cmd[4]) > 1))
             {
                 strcpy(log, "Movement is not allowed.");
                 return 0;
             }
+        }
+        if (board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] == 'p')
+        {
+            strcpy(log, "You cannot capture your own piece.");
+            return 0;
         }
         break;
     }
@@ -262,6 +282,33 @@ int isValidRookMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "Movement is not allowed.");
             return 0;
         }
+        if (board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] == 'R')
+        {
+            strcpy(log, "You cannot capture your own piece.");
+            return 0;
+        }
+        if (cmd[1] - cmd[3] != 0)
+        {
+            for (int i = 0; i < abs(cmd[1] - cmd[3]) - 1; i++)
+            {
+                if (board[CBD - (cmd[2] - 49 + 1 + 1)][cmd[1] - 97 + 1 + (i + 1)] != ' ')
+                {
+                    strcpy(log, "There are one or more obstacles in the way.");
+                    return 0;
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < abs(cmd[2] - cmd[4]) - 1; i++)
+            {
+                if (board[CBD - (cmd[2] - 49 + 1 + 1 + (i + 1))][cmd[1] - 97 + 1] != ' ')
+                {
+                    strcpy(log, "There are one or more obstacles in the way.");
+                    return 0;
+                }
+            }
+        }
         break;
 
     case 2:
@@ -274,6 +321,33 @@ int isValidRookMove(char board[][CBD], char cmd[], int turn, char log[])
         {
             strcpy(log, "Movement is not allowed.");
             return 0;
+        }
+        if (board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] == 'r')
+        {
+            strcpy(log, "You cannot capture your own piece.");
+            return 0;
+        }
+        if (cmd[1] - cmd[3] != 0)
+        {
+            for (int i = 0; i < abs(cmd[1] - cmd[3]) - 1; i++)
+            {
+                if (board[cmd[2] - 49 + 1][CBD - (cmd[1] - 97 + 1 + 1 + (i + 1))] != ' ')
+                {
+                    strcpy(log, "There are one or more obstacles in the way.");
+                    return 0;
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < abs(cmd[2] - cmd[4]) - 1; i++)
+            {
+                if (board[cmd[2] - 49 + 1 + (i + 1)][CBD - (cmd[1] - 97 + 1 + 1)] != ' ')
+                {
+                    strcpy(log, "There are one or more obstacles in the way.");
+                    return 0;
+                }
+            }
         }
         break;
     }
@@ -301,6 +375,11 @@ int isValidKnightMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "Movement is not allowed.");
             return 0;
         }
+        if (board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] == 'N')
+        {
+            strcpy(log, "You cannot capture your own piece.");
+            return 0;
+        }
         break;
 
     case 2:
@@ -312,6 +391,11 @@ int isValidKnightMove(char board[][CBD], char cmd[], int turn, char log[])
         if (abs(cmd[1] - cmd[3]) != abs(cmd[2] - cmd[4]) || abs(cmd[2] - cmd[4]) != 2)
         {
             strcpy(log, "Movement is not allowed.");
+            return 0;
+        }
+        if (board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] == 'n')
+        {
+            strcpy(log, "You cannot capture your own piece.");
             return 0;
         }
         break;
@@ -345,6 +429,11 @@ int isValidBishopMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "You can't go that way.");
             return 0;
         }
+        if (board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] == 'B')
+        {
+            strcpy(log, "You cannot capture your own piece.");
+            return 0;
+        }
         break;
 
     case 2:
@@ -361,6 +450,11 @@ int isValidBishopMove(char board[][CBD], char cmd[], int turn, char log[])
         if ((CBD - (cmd[1] - 97 + 1 + 1) < 5 && cmd[1] < cmd[3]) || (CBD - (cmd[1] - 97 + 1 + 1) > 4 && cmd[1] > cmd[3]))
         {
             strcpy(log, "You can't go that way.");
+            return 0;
+        }
+        if (board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] == 'b')
+        {
+            strcpy(log, "You cannot capture your own piece.");
             return 0;
         }
         break;
@@ -389,6 +483,11 @@ int isValidQueenMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "Movement is not allowed.");
             return 0;
         }
+        if (board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] == 'Q')
+        {
+            strcpy(log, "You cannot capture your own piece.");
+            return 0;
+        }
         break;
 
     case 2:
@@ -400,6 +499,11 @@ int isValidQueenMove(char board[][CBD], char cmd[], int turn, char log[])
         if ((cmd[2] != cmd[4]) && (cmd[1] != cmd[3]) && (abs(cmd[1] - cmd[3]) != abs(cmd[2] - cmd[4])) && (abs(cmd[1] - cmd[3]) != 1) && (abs(cmd[2] - cmd[4]) != 2))
         {
             strcpy(log, "Movement is not allowed.");
+            return 0;
+        }
+        if (board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] == 'q')
+        {
+            strcpy(log, "You cannot capture your own piece.");
             return 0;
         }
         break;
@@ -428,6 +532,11 @@ int isValidKingMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "Movement is not allowed.");
             return 0;
         }
+        if (board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] == 'K')
+        {
+            strcpy(log, "You cannot capture your own piece.");
+            return 0;
+        }
         break;
 
     case 2:
@@ -441,10 +550,17 @@ int isValidKingMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "Movement is not allowed.");
             return 0;
         }
+        if (board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] == 'k')
+        {
+            strcpy(log, "You cannot capture your own piece.");
+            return 0;
+        }
         break;
     }
 
     return 1;
 }
 
-int isCheckMate() {}
+int isCheckMate()
+{
+}
