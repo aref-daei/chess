@@ -165,18 +165,22 @@ void switchTurn(char board[][CBD], int *turn)
 
 void move(char board[][CBD], char command[], int turn, char log[])
 {
-    switch (turn)
+    if (command[1] < 'i' && command[2] < '9' && command[3] < 'i' && command[4] < '9')
     {
-    case 1:
-        board[CBD - (command[4] - 49 + 1 + 1)][command[3] - 97 + 1] = board[CBD - (command[2] - 49 + 1 + 1)][command[1] - 97 + 1];
-        board[CBD - (command[2] - 49 + 1 + 1)][command[1] - 97 + 1] = ' ';
-        break;
-    case 2:
-        board[command[4] - 49 + 1][CBD - (command[3] - 97 + 1 + 1)] = board[command[2] - 49 + 1][CBD - (command[1] - 97 + 1 + 1)];
-        board[command[2] - 49 + 1][CBD - (command[1] - 97 + 1 + 1)] = ' ';
-        break;
+        switch (turn)
+        {
+        case 1:
+            board[CBD - (command[4] - 49 + 1 + 1)][command[3] - 97 + 1] = board[CBD - (command[2] - 49 + 1 + 1)][command[1] - 97 + 1];
+            board[CBD - (command[2] - 49 + 1 + 1)][command[1] - 97 + 1] = ' ';
+            break;
+        case 2:
+            board[command[4] - 49 + 1][CBD - (command[3] - 97 + 1 + 1)] = board[command[2] - 49 + 1][CBD - (command[1] - 97 + 1 + 1)];
+            board[command[2] - 49 + 1][CBD - (command[1] - 97 + 1 + 1)] = ' ';
+            break;
+        }
     }
-    /* zone */
+    else
+        strcpy(log, "The movement is out of the zone.");
 }
 
 int isValidPawnMove(char board[][CBD], char command[], int turn, char log[])
