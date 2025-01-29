@@ -145,8 +145,8 @@ void displayBoard(char board[][CBD], int turn, int round, char log[])
         if (i == 0 && log[0] != '\0')
             printf("    \x1b[93mLog: %s%s", log, colorReset);
 
-        for (int i = 0; i < 65; i++)
-            log[i] = '\0';
+        for (int x = 0; x < 65; x++)
+            log[x] = '\0';
 
         printf("\n");
     }
@@ -561,6 +561,4 @@ int isValidKingMove(char board[][CBD], char cmd[], int turn, char log[])
     return 1;
 }
 
-int isCheckMate()
-{
-}
+int isCheckMate() {}
