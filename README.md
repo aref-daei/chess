@@ -1,6 +1,6 @@
 # The chess game document
 
-**Updated Summary of Chess Game Implementation in C**
+**Chess Game Implementation in C**
 
 **Project Overview:**
 - **Topic:** Implementation of a Chess Game in the Terminal using C.
