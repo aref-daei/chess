@@ -37,7 +37,7 @@ int main()
 
     int round = 1;
 
-    char log[64] = {'\0'};
+    char log[64] = "Welcome to this game!";
 
     while (1)
     {
@@ -139,14 +139,16 @@ void displayBoard(char board[][CBD], int turn, int round, char log[])
                 printf("%s%c %s", colorBlack, board[i][j], colorReset);
         }
 
-        // if (i == 0)
-        //     printf("    Player's turn: %d  Round: %d", turn, round);
+        if (i == 0)
+            printf("    Player's turn: %d  Round: %d", turn, round);
 
-        if (i == 0 && log[0] != '\0')
+        if (i == 1 && log[0] != '\0')
+        {
             printf("    \x1b[93mLog: %s%s", log, colorReset);
 
-        for (int x = 0; x < 65; x++)
-            log[x] = '\0';
+            for (int x = 0; x < 65; x++)
+                log[x] = '\0';
+        }
 
         printf("\n");
     }
