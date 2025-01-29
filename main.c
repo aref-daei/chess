@@ -296,7 +296,7 @@ int isValidKnightMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
-        if (abs(cmd[1]-cmd[3]) != abs(cmd[2]-cmd[4]) || abs(cmd[2]-cmd[4]) != 2)
+        if (abs(cmd[1] - cmd[3]) != abs(cmd[2] - cmd[4]) || abs(cmd[2] - cmd[4]) != 2)
         {
             strcpy(log, "Movement is not allowed.");
             return 0;
@@ -309,7 +309,7 @@ int isValidKnightMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
-        if (abs(cmd[1]-cmd[3]) != abs(cmd[2]-cmd[4]) || abs(cmd[2]-cmd[4]) != 2)
+        if (abs(cmd[1] - cmd[3]) != abs(cmd[2] - cmd[4]) || abs(cmd[2] - cmd[4]) != 2)
         {
             strcpy(log, "Movement is not allowed.");
             return 0;
@@ -335,7 +335,7 @@ int isValidBishopMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
-        if (abs(cmd[1]-cmd[3]) != abs(cmd[2]-cmd[4]))
+        if (abs(cmd[1] - cmd[3]) != abs(cmd[2] - cmd[4]))
         {
             strcpy(log, "Movement is not allowed.");
             return 0;
@@ -353,7 +353,7 @@ int isValidBishopMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
-        if (abs(cmd[1]-cmd[3]) != abs(cmd[2]-cmd[4]))
+        if (abs(cmd[1] - cmd[3]) != abs(cmd[2] - cmd[4]))
         {
             strcpy(log, "Movement is not allowed.");
             return 0;
@@ -384,7 +384,7 @@ int isValidQueenMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
-        if ((cmd[2] != cmd[4]) && (cmd[1] != cmd[3]) && (abs(cmd[1]-cmd[3]) != abs(cmd[2]-cmd[4])) && (abs(cmd[1]-cmd[3]) != 1) && (abs(cmd[2]-cmd[4]) != 2))
+        if ((cmd[2] != cmd[4]) && (cmd[1] != cmd[3]) && (abs(cmd[1] - cmd[3]) != abs(cmd[2] - cmd[4])) && (abs(cmd[1] - cmd[3]) != 1) && (abs(cmd[2] - cmd[4]) != 2))
         {
             strcpy(log, "Movement is not allowed.");
             return 0;
@@ -397,7 +397,7 @@ int isValidQueenMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
-        if ((cmd[2] != cmd[4]) && (cmd[1] != cmd[3]) && (abs(cmd[1]-cmd[3]) != abs(cmd[2]-cmd[4])) && (abs(cmd[1]-cmd[3]) != 1) && (abs(cmd[2]-cmd[4]) != 2))
+        if ((cmd[2] != cmd[4]) && (cmd[1] != cmd[3]) && (abs(cmd[1] - cmd[3]) != abs(cmd[2] - cmd[4])) && (abs(cmd[1] - cmd[3]) != 1) && (abs(cmd[2] - cmd[4]) != 2))
         {
             strcpy(log, "Movement is not allowed.");
             return 0;
@@ -423,7 +423,7 @@ int isValidKingMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
-        if ((abs(cmd[1]-cmd[3]) != 1) && (abs(cmd[2]-cmd[4]) != 2))
+        if ((abs(cmd[1] - cmd[3]) != 1) && (abs(cmd[2] - cmd[4]) != 1))
         {
             strcpy(log, "Movement is not allowed.");
             return 0;
@@ -436,7 +436,7 @@ int isValidKingMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
-        if ((abs(cmd[1]-cmd[3]) != 1) && (abs(cmd[2]-cmd[4]) != 2))
+        if ((abs(cmd[1] - cmd[3]) != 1) && (abs(cmd[2] - cmd[4]) != 1))
         {
             strcpy(log, "Movement is not allowed.");
             return 0;
