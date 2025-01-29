@@ -95,11 +95,11 @@ int main()
             continue;
         }
 
-        if (isCheckMate())
-        {
-            printf("%s\n", log);
-            break;
-        }
+        // if (isCheckMate())
+        // {
+        //     printf("%s\n", log);
+        //     break;
+        // }
 
         switchTurn(board, &turn);
     }
@@ -320,7 +320,7 @@ int isValidKnightMove(char board[][CBD], char cmd[], int turn, char log[])
     return 1;
 }
 
-int isValidBishopMove(char board[][CBD], char cmd[], int turn, char log[]) /* This has a problem. */
+int isValidBishopMove(char board[][CBD], char cmd[], int turn, char log[])
 {
     if ((97 > cmd[3] || cmd[3] > 'h') || (49 > cmd[4] || cmd[4] > '8'))
     {
@@ -384,12 +384,22 @@ int isValidQueenMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
+        if ((cmd[2] != cmd[4]) && (cmd[1] != cmd[3]) && (abs(cmd[1]-cmd[3]) != abs(cmd[2]-cmd[4])) && (abs(cmd[1]-cmd[3]) != 1) && (abs(cmd[2]-cmd[4]) != 2))
+        {
+            strcpy(log, "Movement is not allowed.");
+            return 0;
+        }
         break;
 
     case 2:
         if (board[cmd[2] - 49 + 1][CBD - (cmd[1] - 97 + 1 + 1)] != 'q')
         {
             strcpy(log, "The piece you chose is wrong.");
+            return 0;
+        }
+        if ((cmd[2] != cmd[4]) && (cmd[1] != cmd[3]) && (abs(cmd[1]-cmd[3]) != abs(cmd[2]-cmd[4])) && (abs(cmd[1]-cmd[3]) != 1) && (abs(cmd[2]-cmd[4]) != 2))
+        {
+            strcpy(log, "Movement is not allowed.");
             return 0;
         }
         break;
