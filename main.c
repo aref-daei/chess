@@ -325,7 +325,7 @@ int isValidBishopMove(char board[][CBD], char cmd[], int turn, char log[]) /* Th
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
-        if (CBD - (cmd[2] - 49 + 1) + cmd[1] - 97 != CBD - (cmd[4] - 49 + 1) + cmd[3] - 97)
+        if (abs(cmd[1]-cmd[3]) != abs(cmd[2]-cmd[4]))
         {
             strcpy(log, "Movement is not allowed.");
             return 0;
@@ -343,9 +343,14 @@ int isValidBishopMove(char board[][CBD], char cmd[], int turn, char log[]) /* Th
             strcpy(log, "The piece you chose is wrong.");
             return 0;
         }
-        if (cmd[2] - 49 + 1 + CBD - (cmd[1] - 97 + 1) != cmd[4] - 49 + 1 + CBD - (cmd[3] - 97 + 1))
+        if (abs(cmd[1]-cmd[3]) != abs(cmd[2]-cmd[4]))
         {
             strcpy(log, "Movement is not allowed.");
+            return 0;
+        }
+        if ((CBD - (cmd[1] - 97 + 1 + 1) < 5 && cmd[1] < cmd[3]) || (CBD - (cmd[1] - 97 + 1 + 1) > 4 && cmd[1] > cmd[3]))
+        {
+            strcpy(log, "You can't go that way.");
             return 0;
         }
         break;
