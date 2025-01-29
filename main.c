@@ -212,6 +212,11 @@ int isValidPawnMove(char board[][CBD], char cmd[], int turn, char log[])
 
 int isValidRookMove(char board[][CBD], char cmd[], int turn, char log[])
 {
+    if ((97 > cmd[3] || cmd[3] > 'h') || (49 > cmd[4] || cmd[4] > '8'))
+    {
+        strcpy(log, "The movement is out of the zone.");
+        return 0;
+    }
     switch (turn)
     {
     case 1:
@@ -246,6 +251,11 @@ int isValidRookMove(char board[][CBD], char cmd[], int turn, char log[])
 
 int isValidKnightMove(char board[][CBD], char cmd[], int turn, char log[])
 {
+    if ((97 > cmd[3] || cmd[3] > 'h') || (49 > cmd[4] || cmd[4] > '8'))
+    {
+        strcpy(log, "The movement is out of the zone.");
+        return 0;
+    }
     switch (turn)
     {
     case 1:
@@ -270,6 +280,11 @@ int isValidKnightMove(char board[][CBD], char cmd[], int turn, char log[])
 
 int isValidBishopMove(char board[][CBD], char cmd[], int turn, char log[]) /* This has a problem. */
 {
+    if ((97 > cmd[3] || cmd[3] > 'h') || (49 > cmd[4] || cmd[4] > '8'))
+    {
+        strcpy(log, "The movement is out of the zone.");
+        return 0;
+    }
     switch (turn)
     {
     case 1:
@@ -309,6 +324,11 @@ int isValidBishopMove(char board[][CBD], char cmd[], int turn, char log[]) /* Th
 
 int isValidQueenMove(char board[][CBD], char cmd[], int turn, char log[])
 {
+    if ((97 > cmd[3] || cmd[3] > 'h') || (49 > cmd[4] || cmd[4] > '8'))
+    {
+        strcpy(log, "The movement is out of the zone.");
+        return 0;
+    }
     switch (turn)
     {
     case 1:
@@ -333,6 +353,11 @@ int isValidQueenMove(char board[][CBD], char cmd[], int turn, char log[])
 
 int isValidKingMove(char board[][CBD], char cmd[], int turn, char log[])
 {
+    if ((97 > cmd[3] || cmd[3] > 'h') || (49 > cmd[4] || cmd[4] > '8'))
+    {
+        strcpy(log, "The movement is out of the zone.");
+        return 0;
+    }
     switch (turn)
     {
     case 1:
