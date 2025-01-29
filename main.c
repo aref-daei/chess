@@ -37,12 +37,12 @@ int main()
 
     while (1)
     {
-        char log[128];
+        char log[64];
 
         displayBoard(board, log);
 
         char cmd[8];
-        printf("cmd:   [cmd]\nExit:      exit\n> ");
+        printf("Command:   [PIECE][poo][pod]\nExit:      exit\n> ");
         scanf("%s", cmd);
 
         if (cmd[0] == 'P')
@@ -140,6 +140,9 @@ void displayBoard(char board[][CBD], char log[])
         if (i == 0 && log[0] != '\0')
             printf("    Log: %s", log);
 
+        for (int i = 0; i < 65; i++)
+            log[i] = '\0';
+
         printf("\n");
     }
 }
@@ -165,26 +168,26 @@ void switchTurn(char board[][CBD], int *turn)
 
 void move(char board[][CBD], char cmd[], int turn, char log[])
 {
-    if (cmd[1] < 'i' && cmd[2] < '9' && cmd[3] < 'i' && cmd[4] < '9')
+    switch (turn)
     {
-        switch (turn)
-        {
-        case 1:
-            board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] = board[CBD - (cmd[2] - 49 + 1 + 1)][cmd[1] - 97 + 1];
-            board[CBD - (cmd[2] - 49 + 1 + 1)][cmd[1] - 97 + 1] = ' ';
-            break;
-        case 2:
-            board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] = board[cmd[2] - 49 + 1][CBD - (cmd[1] - 97 + 1 + 1)];
-            board[cmd[2] - 49 + 1][CBD - (cmd[1] - 97 + 1 + 1)] = ' ';
-            break;
-        }
+    case 1:
+        board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] = board[CBD - (cmd[2] - 49 + 1 + 1)][cmd[1] - 97 + 1];
+        board[CBD - (cmd[2] - 49 + 1 + 1)][cmd[1] - 97 + 1] = ' ';
+        break;
+    case 2:
+        board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] = board[cmd[2] - 49 + 1][CBD - (cmd[1] - 97 + 1 + 1)];
+        board[cmd[2] - 49 + 1][CBD - (cmd[1] - 97 + 1 + 1)] = ' ';
+        break;
     }
-    else
-        strcpy(log, "The movement is out of the zone.");
 }
 
 int isValidPawnMove(char board[][CBD], char cmd[], int turn, char log[])
 {
+    if ((97 > cmd[3] || cmd[3] > 'h') || (49 > cmd[4] || cmd[4] > '8'))
+    {
+        strcpy(log, "The movement is out of the zone.");
+        return 0;
+    }
     switch (turn)
     {
     case 1:
