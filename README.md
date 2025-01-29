@@ -5,6 +5,26 @@
 **Project Overview:**
 - **Topic:** Implementation of a Chess Game in the Terminal using C.
 
+**How to Install It**
+
+1. **Open Terminal:** Launch your terminal application.
+
+2. **Navigate to the Project Directory:** Use the `cd` command to change to the directory where your C source file (e.g., `chess.c`) is located.
+   ```bash
+   cd path/to/your/project
+   ```
+
+3. **Compile the Program:** Use the `gcc` command to compile your C program. Replace `chess.c` with the name of your source file.
+   ```bash
+   gcc -o chess chess.c
+   ```
+   - The `-o chess` option specifies the name of the output executable file.
+
+4. **Run the Program:** After successful compilation, run the program using:
+   ```bash
+   ./chess
+   ```
+
 **Main Features:**
 
 1. **Display the Chessboard:**
