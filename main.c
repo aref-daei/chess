@@ -35,10 +35,10 @@ int main()
 
     int turn = 1;
 
+    char log[64] = {'\0'};
+
     while (1)
     {
-        char log[64];
-
         displayBoard(board, log);
 
         char cmd[8];
@@ -91,7 +91,7 @@ int main()
             break;
         else
         {
-            strcpy(log, "The cmd is invalid!");
+            strcpy(log, "The command is invalid!");
             continue;
         }
 
@@ -138,7 +138,7 @@ void displayBoard(char board[][CBD], char log[])
         }
 
         if (i == 0 && log[0] != '\0')
-            printf("    Log: %s", log);
+            printf("    \x1b[93mLog: %s%s", log, colorReset);
 
         for (int i = 0; i < 65; i++)
             log[i] = '\0';
