@@ -47,14 +47,14 @@
 
 4. **Managing Player Turns:**
    - Players alternate turns, with white starting first.
-   - Display the current player's turn, number of rounds, game logs, moved pieces, and messages on the right side of the game board.
+   - Display the current player's turn, number of rounds, game logs, and messages on the right side of the game board.
 
 5. **Input Handling:**
    - Moves entered in the format: Piece symbol (P, R, N, B, Q, K), Source square (e.g., e2), Destination square (e.g., e4).
    - Example: `Pe2e4` (Pawn from e2 to e4).
    - Invalid moves prompt an error message.
 
-**Suggested Code Structure:**
+**Code Structure:**
 1. **Display Board Function:**
    - `void displayBoard()`
 2. **Move Validation Functions:**
