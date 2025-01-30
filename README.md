@@ -75,3 +75,5 @@
      - Update the board
      - Check for end game conditions
      - Update and display game logs, moved pieces, and messages.
+
+    This chess game implementation in C provides a comprehensive and engaging way to experience the classic game of chess in a terminal environment. By following the outlined features and structure, along with the compilation steps using the GCC compiler, you can successfully create and run the game. This project not only enhances your programming skills but also deepens your understanding of game logic and user interaction in software development. Enjoy coding and playing your chess game!
