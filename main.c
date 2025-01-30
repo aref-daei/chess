@@ -109,7 +109,6 @@ int main()
 
         // if (isCheckMate())
         // {
-        //     printf("%s\n", log);
         //     break;
         // }
 
