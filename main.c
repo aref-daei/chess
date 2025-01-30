@@ -233,7 +233,7 @@ int isValidPawnMove(char board[][CBD], char cmd[], int turn, char log[])
                 return 0;
             }
         }
-        if (board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] < 'Z')
+        if ('A' < board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] && board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] < 'Z')
         {
             strcpy(log, "You cannot capture your own piece.");
             return 0;
@@ -262,7 +262,7 @@ int isValidPawnMove(char board[][CBD], char cmd[], int turn, char log[])
                 return 0;
             }
         }
-        if (board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] > 'a')
+        if ('a' < board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] && board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] < 'z')
         {
             strcpy(log, "You cannot capture your own piece.");
             return 0;
@@ -293,7 +293,7 @@ int isValidRookMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "Movement is not allowed.");
             return 0;
         }
-        if (board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] < 'Z')
+        if ('A' < board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] && board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] < 'Z')
         {
             strcpy(log, "You cannot capture your own piece.");
             return 0;
@@ -333,7 +333,7 @@ int isValidRookMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "Movement is not allowed.");
             return 0;
         }
-        if (board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] > 'a')
+        if ('a' < board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] && board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] < 'z')
         {
             strcpy(log, "You cannot capture your own piece.");
             return 0;
@@ -386,7 +386,7 @@ int isValidKnightMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "Movement is not allowed.");
             return 0;
         }
-        if (board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] < 'Z')
+        if ('A' < board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] && board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] < 'Z')
         {
             strcpy(log, "You cannot capture your own piece.");
             return 0;
@@ -404,7 +404,7 @@ int isValidKnightMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "Movement is not allowed.");
             return 0;
         }
-        if (board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] > 'a')
+        if ('a' < board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] && board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] < 'z')
         {
             strcpy(log, "You cannot capture your own piece.");
             return 0;
@@ -440,7 +440,7 @@ int isValidBishopMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "You can't go that way.");
             return 0;
         }
-        if (board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] < 'Z')
+        if ('A' < board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] && board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] < 'Z')
         {
             strcpy(log, "You cannot capture your own piece.");
             return 0;
@@ -463,7 +463,7 @@ int isValidBishopMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "You can't go that way.");
             return 0;
         }
-        if (board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] > 'a')
+        if ('a' < board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] && board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] < 'z')
         {
             strcpy(log, "You cannot capture your own piece.");
             return 0;
@@ -494,7 +494,7 @@ int isValidQueenMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "Movement is not allowed.");
             return 0;
         }
-        if (board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] < 'Z')
+        if ('A' < board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] && board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] < 'Z')
         {
             strcpy(log, "You cannot capture your own piece.");
             return 0;
@@ -512,7 +512,7 @@ int isValidQueenMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "Movement is not allowed.");
             return 0;
         }
-        if (board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] > 'a')
+        if ('a' < board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] && board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] < 'z')
         {
             strcpy(log, "You cannot capture your own piece.");
             return 0;
@@ -543,7 +543,7 @@ int isValidKingMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "Movement is not allowed.");
             return 0;
         }
-        if (board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] < 'Z')
+        if ('A' < board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] && board[CBD - (cmd[4] - 49 + 1 + 1)][cmd[3] - 97 + 1] < 'Z')
         {
             strcpy(log, "You cannot capture your own piece.");
             return 0;
@@ -561,7 +561,7 @@ int isValidKingMove(char board[][CBD], char cmd[], int turn, char log[])
             strcpy(log, "Movement is not allowed.");
             return 0;
         }
-        if (board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] > 'a')
+        if ('a' < board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] && board[cmd[4] - 49 + 1][CBD - (cmd[3] - 97 + 1 + 1)] < 'z')
         {
             strcpy(log, "You cannot capture your own piece.");
             return 0;
